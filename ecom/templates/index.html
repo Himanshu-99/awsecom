@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+<body>
+   <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<table align="center" border="2">
+    <tr>
+        <th>
+            product no<input type="number" name="t1">
+        </th>
+        <th>
+            product name<input type="text" name="t2">
+        </th>
+        <th>
+            price<input type="number" name="t3">
+        </th>
+        <th>
+            upload photo<input type="file" name="photo">
+        </th>
+        <th>
+            <button type="submit">Save</button>
+        </th>
+    </tr>
+    {% for x in product %}
+        <tr>
+        <th>{{ x.no }}</th>
+        <th>{{ x.name }}</th>
+        <th>{{ x.price }}</th>
+        <th>
+            <img src="{{ x.photo.url }}" width="200" height="200">
+        </th>
+        </form>
+        <th>
+                <form action="{% url 'delete'%}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{ x.no }}" name="no" readonly>
+        <button type="submit" class="btn btn-danger">yes</button>
+        </form>
+    {% endfor %}
+        </th>
+        </tr>
+        <tr>
+        <th>
+        </th>
+        </tr>
+{#        <form action="{% url 'delete'%}" method="post">#}
+{#    {% csrf_token %}#}
+{#    <input type="hidden" value="{{ x.no }}" name="no" readonly>#}
+{#        <button type="submit" class="btn btn-danger">yes</button>#}
+{#        </form>#}
+{#    {% endfor %}#}
+</table>
+
+{#    {% endfor %}#}
+</body>
+</html>
